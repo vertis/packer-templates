@@ -1,0 +1,15 @@
+{
+  "builders": [{
+    "type": "virtualbox",
+    "guest_os_type": "RedHat_64",
+    "iso_url": "/Volumes/Data/vagrant/isos/CentOS-6.4-x86_64-minimal.iso",
+    "iso_md5": "4a5fa01c81cc300f4729136e28ebe600",
+    "ssh_username" : "vagrant",
+    "ssh_password" : "vagrant",
+    "boot_command" : ["<tab><wait> ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant-centos.ks <return>"],
+    "http_directory" : "files"
+  }],
+  "post-processors": [
+    "vagrant"
+  ]
+}

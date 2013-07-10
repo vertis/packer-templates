@@ -3,7 +3,7 @@ text
 cdrom
 lang en_US.UTF-8
 keyboard us
-network --onboot yes --device eth0 --bootproto dhcp --noipv6 --hostname vagrant-centos-6-3.vagrantup.com
+network --onboot yes --device eth0 --bootproto dhcp --noipv6 --hostname vagrant-centos-6-4.vagrantup.com
 rootpw vagrant
 firewall --disabled
 authconfig --enableshadow --passalgo=sha512
@@ -13,12 +13,12 @@ zerombr
 clearpart --all
 part /boot --fstype=ext4 --size=512
 part pv.01 --grow --size=1
-volgroup vg_vagrantcentos63 --pesize=4096 pv.01
-logvol swap --name=lv_swap --vgname=vg_vagrantcentos63 --size=1024
-logvol / --fstype=ext4 --name=lv_root --vgname=vg_vagrantcentos63 --grow --size=1
+volgroup vg_vagrantcentos64 --pesize=4096 pv.01
+logvol swap --name=lv_swap --vgname=vg_vagrantcentos64 --size=1024
+logvol / --fstype=ext4 --name=lv_root --vgname=vg_vagrantcentos64 --grow --size=1
 bootloader --location=mbr --append="crashkernel=auto rhgb quiet"
 user --name=vagrant --groups=wheel --password=vagrant
-poweroff --eject
+reboot --eject
 
 %packages --nobase
 @core
