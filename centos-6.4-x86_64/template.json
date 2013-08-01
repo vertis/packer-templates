@@ -2,14 +2,27 @@
   "builders": [{
     "type": "virtualbox",
     "guest_os_type": "RedHat_64",
-    "iso_url": "/Volumes/Data/vagrant/isos/CentOS-6.4-x86_64-minimal.iso",
-    "iso_md5": "4a5fa01c81cc300f4729136e28ebe600",
-    "ssh_username" : "vagrant",
+    "iso_url": "/Volumes/external/vagrant/isos/CentOS-6.4-x86_64-minimal.iso",
+    "iso_checksum": "4a5fa01c81cc300f4729136e28ebe600",
+    "iso_checksum_type" : "md5",
+    "ssh_username" : "root",
     "ssh_password" : "vagrant",
     "boot_command" : ["<tab><wait> ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant-centos.ks <return>"],
-    "http_directory" : "files"
+    "http_directory" : "http",
+    "virtualbox_version_file" : "/etc/.vbox_version",
+    "guest_additions_path" : "/tmp/VBoxGuestAdditions.iso"
   }],
+  "provisioners" : [{
+    "type" : "shell",
+    "scripts" : [
+      "scripts/vagrant.sh"
+    ]
+    }],
   "post-processors": [
-    "vagrant"
+    {
+      "type": "vagrant",
+      "output": "/Volumes/external/vagrant/base-boxes/centos-6.4-x86_64-{{.Provider}}.box",
+      "keep_input_artifact": false
+    }
   ]
 }
